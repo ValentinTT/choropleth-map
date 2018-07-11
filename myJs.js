@@ -54,19 +54,19 @@ const drawChart = (educationStatistics, usaMap) => {
     .scaleThreshold()
     .domain(
       d3
-        .range(colorQuantity)
-        .map(
-          v =>
-            v * ((maxBachelorOrHiger - minBachelorOrHiger) / colorQuantity) +
-            minBachelorOrHiger
-        )
+      .range(colorQuantity)
+      .map(
+        v =>
+        v * ((maxBachelorOrHiger - minBachelorOrHiger) / colorQuantity) +
+        minBachelorOrHiger
+      )
     )
     .range(d3.schemeOranges[colorQuantity]);
   const scaleX = d3
     .scaleLinear()
     .domain([
       minBachelorOrHiger -
-        (maxBachelorOrHiger - minBachelorOrHiger) / colorQuantity,
+      (maxBachelorOrHiger - minBachelorOrHiger) / colorQuantity,
       maxBachelorOrHiger
     ])
     .range([width - (colorQuantity + 1) * legendCellWidth, width]);
@@ -108,11 +108,11 @@ const drawChart = (educationStatistics, usaMap) => {
         .style("display", "inline-block")
         .html(
           county.areaName +
-            " (" +
-            county.state +
-            ") " +
-            county.bachelorsOrHigher +
-            "%"
+          " (" +
+          county.state +
+          ") " +
+          county.bachelorsOrHigher +
+          "%"
         );
     })
     .on("mouseout", () => tooltip.style("display", "none"));
@@ -138,17 +138,20 @@ const drawChart = (educationStatistics, usaMap) => {
     .attr("width", d => scaleX(d[1]) - scaleX(d[0]))
     .attr("fill", d => scaleColors(d[0]));
 
-  g.call(
-    d3
+  g.append("g")
+    .attr("transform", "translate(" + legendCellWidth * -1 + ", 0)")
+    .call(
+      d3
       .axisBottom(scaleX)
       .tickSize(13)
-      .tickFormat(function(x, i) {
+      .tickFormat((x, i) => {
         return i ? Math.round(x) : Math.round(x) + "%";
       })
       .tickValues(scaleColors.domain())
-  )
+    )
     .select(".domain")
     .remove();
+  console.log(scaleX.range());
 
   //Tooltip
   const tooltip = d3
