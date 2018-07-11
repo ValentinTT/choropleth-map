@@ -1,0 +1,62 @@
+$bg-tooltip: rgb(31, 31, 31);
+$tooltip-color: #fff;
+$anchor-color: #D94801;
+$anchor-color-hover: rgba(217, 73, 1, 0.596);
+* {
+  user-select: none;
+}
+
+header {
+  h1,
+  h2 {
+    text-align: center;
+  }
+}
+
+#tooltip {
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  min-width: 50px;
+  height: auto;
+  background: $bg-tooltip;
+  opacity: .8;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  color: $tooltip-color;
+}
+
+main {
+  margin-bottom: 40px;
+}
+
+footer {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  a {
+    text-decoration: none;
+    font-size: 1em;
+    color: $anchor-color;
+    transition: color .1s ease-in;
+    &:focus {
+      color: $anchor-color;
+    }
+    &:hover {
+      color: $anchor-color-hover;
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
